@@ -1,0 +1,21 @@
+﻿.cartGrande{
+    width :510px;
+    height : auto;
+   
+    /*padding :25px;*/
+}
+.cartPequeno{
+    width :550px;
+    height : auto;
+   
+    /*padding :25px;*/
+}
+.cartLargo{
+    width : 800px;
+    height: 400px;
+    
+}
+.logoPequeno{
+    width :150px;
+    height : auto;
+}
