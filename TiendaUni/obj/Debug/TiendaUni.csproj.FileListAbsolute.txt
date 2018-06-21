@@ -101,3 +101,8 @@ C:\Users\HP004\Desktop\TiendaUni\TiendaUni\bin\es\System.Web.Mvc.resources.dll
 C:\Users\HP004\Desktop\TiendaUni\TiendaUni\obj\Debug\TiendaUni.csprojResolveAssemblyReference.cache
 C:\Users\HP004\Desktop\TiendaUni\TiendaUni\obj\Debug\TiendaUni.dll
 C:\Users\HP004\Desktop\TiendaUni\TiendaUni\obj\Debug\TiendaUni.pdb
+C:\Users\Chang-PC\Desktop\TiendaUni\TiendaUni\bin\EntityFramework.dll
+C:\Users\Chang-PC\Desktop\TiendaUni\TiendaUni\bin\EntityFramework.SqlServer.dll
+C:\Users\Chang-PC\Desktop\TiendaUni\TiendaUni\bin\EntityFramework.xml
+C:\Users\Chang-PC\Desktop\TiendaUni\TiendaUni\bin\EntityFramework.SqlServer.xml
+C:\Users\Chang-PC\Desktop\TiendaUni\TiendaUni\obj\Debug\TiendaUni.csprojResolveAssemblyReference.cache

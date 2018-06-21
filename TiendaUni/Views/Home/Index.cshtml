@@ -4,7 +4,7 @@
     Layout = "~/layout/_LayoutPrincipal.cshtml";
 }
 
-<h2>Hola Mundo</h2>
+
 <!-- //banner -->
 <div class="banner_bottom_agile_info">
     <div class="container">
@@ -12,7 +12,6 @@
             <div class="col-md-6 wthree_banner_bottom_grid_three_left1 grid">
                 <figure class="effect-roxy">
                     <img src="~/imag/índice3.jpg" alt="Mision" class="img-responsive" />
-
                     <figcaption>
                         <h3><span>M</span>ision</h3>
                         <p>brindar todo lo último en productos para fiestas. </p>
@@ -35,7 +34,7 @@
 <!-- schedule-bottom -->
 <div class="schedule-bottom">
     <div class="col-md-6 agileinfo_schedule_bottom_left">
-        <img src="~/imag/índice5.jpg" alt=" " class="img-responsive" />
+        <img src="~/imag/índice5.jpg" alt="" class="img-responsive" />
 
     </div>
     <div class="col-md-6 agileits_schedule_bottom_right">
@@ -67,7 +66,7 @@
 </div>
 <!-- //schedule-bottom -->
 <!-- banner-bootom-w3-agileits -->
-<div class="banner-bootom-w3-agileits">
+@*<div class="banner-bootom-w3-agileits">
     <div class="container">
         <h3 class="wthree_text_info">Nuestras<span>Tendencias</span></h3>
 
@@ -86,11 +85,10 @@
             </div>
         </div>
         <div class="col-md-7 bb-grids bb-middle-agileits-w3layouts">
-            <div class="container cartGrande">
+            <div class="container ">
                 <div class="bb-middle-agileits-w3layouts grid">
-                    <figure class="effect-roxy">
-                        <img src="~/imag/Productos/0521.jpg" alt="" class="img-responsive" />
-
+                    <figure class="effect-roxy ">
+                        <img src="~/imag/Productos/0521.jpg" alt="" class="img-responsive img-fluid cartPequeno" />
                         <figcaption>
                             <h3><span>D</span>escuento </h3>
                             <p>Asta un 55%</p>
@@ -102,19 +100,121 @@
             <div class="clearfix"></div>
         </div>
     </div>
-</div>
+</div>*@
 <!--/grids-->
-<div class="agile_last_double_sectionw3ls">
+@*<div class="agile_last_double_sectionw3ls">
     <div class="d-flex flex-row">
         <div class="p-2 col-md-6 multi-gd-img multi-gd-text ">
             <a href="womens.html"><img src="~/imag/Productos/0449.jpg" alt=""><h4>Promociones</h4></a>
         </div>
     </div>
-    <div class="d-flex flex-row">
+    <div class="d-flex flex-row" >
         <div class="p-2 col-md-6 multi-gd-img multi-gd-text ">
             <a href="womens.html"><img src="~/imag/Productos/0433.jpg" alt=""><h4>Promociones</h4></a>
         </div>
     </div>
+
+    
+  
     <div class="clearfix"></div>
-</div>
-<!--/grids-->
+</div>*@
+
+
+<!-- /new_arrivals -->
+<div class="new_arrivals_agile_w3ls_info">
+    <div class="container">
+        <h3 class="wthree_text_info">New <span>Arrivals</span></h3>
+        <div id="horizontalTab" >
+            
+            <div ng-if="Categorias.length>0">
+
+                
+
+                <ul class="nav nav-tabs resp-tabs-list" id="myTab" role="tablist"  >
+                    
+                    <li class="nav-item" ng-repeat="item in Categorias"
+                   
+                        >
+                        <a class="nav-link " id="{{item.IdCategoria}}-tab"
+                           ng-class="{'active': CategoriaSelected===item.IdCategoria }"
+                           data-toggle="tab" 
+                           ng-click="SeleccionarCategoria(item.IdCategoria)"
+                           href="#{{item.IdCategoria}}-item" 
+                           role="tab" aria-controls="{{item.IdCategoria}}-item"  
+                           aria-expanded="{{CategoriaSelected===item.IdCategoria}}"
+                           aria-selected="{{CategoriaSelected===item.IdCategoria}}" >
+                        {{item.Nombre}}
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+                
+            <div class="resp-tabs-container">
+
+                <div class="tab-content p-3 row" id="myTabContent" style="display: block !important; min-height: 200px;">
+
+                    <div class="tab-pane fadeIn col-md-4 col-xs-6"  ng-repeat="item in Producto" id="{{item.IdCategoria}}-item"
+                          role="tabpanel" aria-labelledby="{{item.IdCategoria}}-tab"
+                          ng-class="{'show active': CategoriaSelected===item.IdCategoria}"
+                         >
+
+                        <div class="men-pro-item simpleCart_shelfItem w-100 m-3">
+
+                            <div class="men-thumb-item" >
+
+                                <img ng-repeat="itemFotos in item.listaFotos" src="{{itemFotos}}" alt="" class="img-fluid" 
+                                     style="max-height: 280px; width: 100%"
+                                     ng-class="{'pro-image-front': $index === 0 , 'pro-image-back': $index !== 0 }"
+                                     >                        
+
+                            </div>
+
+                            <div class="item-info-product ">
+
+                                <h4>{{item.Nombre}}</h4>
+                                <div class="info-product-price">
+
+                                    <span ng-if="item.Descuento!==null" class="item_price">C$ {{item.Precio_Unitario - ((item.Precio_Unitario * item.Descuento)/100)}}</span>
+                                    <del ng-if="item.Descuento!==null">C$ {{item.Precio_Unitario}}</del>
+
+                                    <span ng-if="item.Descuento===null" class="item_price">C$ {{item.Precio_Unitario}} </span>
+                                  
+                                </div>
+
+                                <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+                                    <form action="#" method="post">
+                                        <fieldset>
+                                            <input type="hidden" name="cmd" value="_cart" />
+                                            <input type="hidden" name="add" value="1" />
+                                            <input type="hidden" name="business" value="" />
+                                            <input type="hidden" name="item_name" value="Formal Blue Shirt" />
+                                            <input type="hidden" name="amount" value="30.99" />
+                                            <input type="hidden" name="discount_amount" value="1.00" />
+                                            <input type="hidden" name="currency_code" value="USD" />
+                                            <input type="hidden" name="return" value="" />
+                                            <input type="hidden" name="cancel_return" value="" />
+                                            <input type="submit" name="submit" value="Add to cart" class="button" />
+                                        </fieldset>
+                                    </form>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+   
+                </div>
+
+                    <div class="clearfix"></div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+<script src="~/js/Angular/inicio.js"></script>
+

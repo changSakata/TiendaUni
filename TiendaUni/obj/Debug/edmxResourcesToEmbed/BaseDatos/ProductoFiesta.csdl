@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NANGINFANJEN_DataBaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="NANGINFANJEN_DataBaseEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(NANGINFANJEN_DataBaseModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(NANGINFANJEN_DataBaseModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <EntitySet Name="Categorias" EntityType="NANGINFANJEN_DataBaseModel.Categoria" />
+    <EntitySet Name="Cotizacions" EntityType="NANGINFANJEN_DataBaseModel.Cotizacion" />
+    <EntitySet Name="Cotizacion_Producto" EntityType="NANGINFANJEN_DataBaseModel.Cotizacion_Producto" />
+    <EntitySet Name="Productoes" EntityType="NANGINFANJEN_DataBaseModel.Producto" />
+    <EntitySet Name="sysdiagrams" EntityType="NANGINFANJEN_DataBaseModel.sysdiagram" />
+    <AssociationSet Name="FK__Producto__IdCate__1273C1CD" Association="NANGINFANJEN_DataBaseModel.FK__Producto__IdCate__1273C1CD">
+      <End Role="Categoria" EntitySet="Categorias" />
+      <End Role="Producto" EntitySet="Productoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Cotizacio__IdCot__286302EC" Association="NANGINFANJEN_DataBaseModel.FK__Cotizacio__IdCot__286302EC">
+      <End Role="Cotizacion" EntitySet="Cotizacions" />
+      <End Role="Cotizacion_Producto" EntitySet="Cotizacion_Producto" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Cotizacio__IdPro__276EDEB3" Association="NANGINFANJEN_DataBaseModel.FK__Cotizacio__IdPro__276EDEB3">
+      <End Role="Producto" EntitySet="Productoes" />
+      <End Role="Cotizacion_Producto" EntitySet="Cotizacion_Producto" />
+    </AssociationSet>
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="Categoria">
+    <Key>
+      <PropertyRef Name="IdCategoria" />
+    </Key>
+    <Property Name="IdCategoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Productoes" Relationship="NANGINFANJEN_DataBaseModel.FK__Producto__IdCate__1273C1CD" FromRole="Categoria" ToRole="Producto" />
+  </EntityType>
+  <EntityType Name="Cotizacion">
+    <Key>
+      <PropertyRef Name="IdCotizacion" />
+    </Key>
+    <Property Name="IdCotizacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="NombreCliente" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Correo" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Cotizacion_Producto" Relationship="NANGINFANJEN_DataBaseModel.FK__Cotizacio__IdCot__286302EC" FromRole="Cotizacion" ToRole="Cotizacion_Producto" />
+  </EntityType>
+  <EntityType Name="Cotizacion_Producto">
+    <Key>
+      <PropertyRef Name="IdCotizacion_Producto" />
+    </Key>
+    <Property Name="IdCotizacion_Producto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdProducto" Type="Int32" Nullable="false" />
+    <Property Name="IdCotizacion" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Cotizacion" Relationship="NANGINFANJEN_DataBaseModel.FK__Cotizacio__IdCot__286302EC" FromRole="Cotizacion_Producto" ToRole="Cotizacion" />
+    <NavigationProperty Name="Producto" Relationship="NANGINFANJEN_DataBaseModel.FK__Cotizacio__IdPro__276EDEB3" FromRole="Cotizacion_Producto" ToRole="Producto" />
+  </EntityType>
+  <EntityType Name="Producto">
+    <Key>
+      <PropertyRef Name="IdProducto" />
+    </Key>
+    <Property Name="IdProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="IdCategoria" Type="Int32" Nullable="false" />
+    <Property Name="urlFoto" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="Cantidad" Type="Int32" />
+    <Property Name="Descuento" Type="Int32" />
+    <Property Name="Presio" Type="Single" />
+    <NavigationProperty Name="Categoria" Relationship="NANGINFANJEN_DataBaseModel.FK__Producto__IdCate__1273C1CD" FromRole="Producto" ToRole="Categoria" />
+    <NavigationProperty Name="Cotizacion_Producto" Relationship="NANGINFANJEN_DataBaseModel.FK__Cotizacio__IdPro__276EDEB3" FromRole="Producto" ToRole="Cotizacion_Producto" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK__Producto__IdCate__1273C1CD">
+    <End Type="NANGINFANJEN_DataBaseModel.Categoria" Role="Categoria" Multiplicity="1" />
+    <End Type="NANGINFANJEN_DataBaseModel.Producto" Role="Producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categoria">
+        <PropertyRef Name="IdCategoria" />
+      </Principal>
+      <Dependent Role="Producto">
+        <PropertyRef Name="IdCategoria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Cotizacio__IdCot__286302EC">
+    <End Type="NANGINFANJEN_DataBaseModel.Cotizacion" Role="Cotizacion" Multiplicity="1" />
+    <End Type="NANGINFANJEN_DataBaseModel.Cotizacion_Producto" Role="Cotizacion_Producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cotizacion">
+        <PropertyRef Name="IdCotizacion" />
+      </Principal>
+      <Dependent Role="Cotizacion_Producto">
+        <PropertyRef Name="IdCotizacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Cotizacio__IdPro__276EDEB3">
+    <End Type="NANGINFANJEN_DataBaseModel.Producto" Role="Producto" Multiplicity="1" />
+    <End Type="NANGINFANJEN_DataBaseModel.Cotizacion_Producto" Role="Cotizacion_Producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Producto">
+        <PropertyRef Name="IdProducto" />
+      </Principal>
+      <Dependent Role="Cotizacion_Producto">
+        <PropertyRef Name="IdProducto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

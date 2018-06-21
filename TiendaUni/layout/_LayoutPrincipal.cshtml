@@ -24,7 +24,7 @@
 
     @*@Html.Partial("../Vistas_parciales/_Partial_header")*@
     <!-- header -->
-    <div class="header" id="home">
+    @*<div class="header" id="home">
         <div class="container">
             <ul>
                 <li> <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Sign In </a></li>
@@ -84,7 +84,7 @@
             </div>
             <div class="clearfix"></div>
         </div>
-    </div>
+    </div>*@
     <!-- //header-bot -->
     <!-- banner -->
     <div class="ban-top">
@@ -254,7 +254,7 @@
 
                     </div>
                     <div class="col-md-4 modal_body_right modal_body_right1">
-                        <img src="images/log_pic.jpg" alt=" " />
+                        <img src="images/log_pic.jpg" alt="" />
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -355,7 +355,7 @@
                         <div class="carousel-caption">
                             <h3>The Biggest <span>Sale</span></h3>
                             <p>Special for today</p>
-                            <a class="hvr-outline-out button2" href="mens.html">Shop Now </a>
+                         
                         </div>
                     </div>
                 </div>
@@ -365,29 +365,28 @@
                     <div class="carousel-caption">
                         <h3>Summer <span>Collection</span></h3>
                         <p>New Arrivals On Sale</p>
-                        <a class="hvr-outline-out button2" href="mens.html">Shop Now </a>
+                     
                     </div>
                 </div>
             </div>
-            <div class="item item3">
+            <div class="item item3" style="background : url(../imag/fond.jpg) ">
                 <div class="container">
                     <div class="carousel-caption">
-                        <h3>The Biggest <span>Sale</span></h3>
-                        <p>Special for today</p>
-                        <a class="hvr-outline-out button2" href="mens.html">Shop Now </a>
+                        <h3><span></span></h3>
+                        <p></p>
                     </div>
                 </div>
             </div>
-            <div class="item item4">
+            <div class="item item4"  style="background : url(../imag/fond2.jpg) ">
                 <div class="container">
                     <div class="carousel-caption">
-                        <h3>Summer <span>Collection</span></h3>
-                        <p>New Arrivals On Sale</p>
-                        <a class="hvr-outline-out button2" href="mens.html">Shop Now </a>
+                        <h3><span></span></h3>
+                        <p></p>
+                       
                     </div>
                 </div>
             </div>
-            <div class="item item5">
+            <div class="item item5"  style="background : url(../imag/índice5.jpg) ">
                 <div class="container">
                     <div class="carousel-caption">
                         <h3>The Biggest <span>Sale</span></h3>
@@ -407,15 +406,22 @@
         </a>
         <!-- The Modal -->
     </div>
-    <!-- //banner -->
-    @RenderBody()
+
+    <script src="~/js/Angular/angular.min.js"></script>
+
+
+    <div ng-app="appInicio" ng-controller="inicioController">
+        @RenderBody()
+    </div>
 
 
     <!-- footer -->
     <div class="footer">
         <div class="footer_agile_inner_info_w3l">
             <div class="col-md-3 footer-left">
-                <div class="logoPequeno"><img src="~/imag/logo.jpg" /></div> 
+               
+                <img class="w-100 img-fluid img img-responsive" src="~/imag/logo.jpg" />
+              
                 
                 <ul class="social-nav model-3d-0 footer-social w3_agile_social two">
                     <li>
@@ -445,6 +451,7 @@
                 </ul>
             </div>
             <div class="col-md-9 footer-right">
+             
                 <div class="sign-grds">
                     <div class="col-md-4 sign-gd">
                         <h4>Nuestra <span>Informatición</span> </h4>

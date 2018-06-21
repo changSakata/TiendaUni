@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NANGINFANJEN_DataBaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Categoria">
+    <Key>
+      <PropertyRef Name="IdCategoria" />
+    </Key>
+    <Property Name="IdCategoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Cotizacion">
+    <Key>
+      <PropertyRef Name="IdCotizacion" />
+    </Key>
+    <Property Name="IdCotizacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="NombreCliente" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Correo" Type="varchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cotizacion_Producto">
+    <Key>
+      <PropertyRef Name="IdCotizacion_Producto" />
+    </Key>
+    <Property Name="IdCotizacion_Producto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdProducto" Type="int" Nullable="false" />
+    <Property Name="IdCotizacion" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Producto">
+    <Key>
+      <PropertyRef Name="IdProducto" />
+    </Key>
+    <Property Name="IdProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="IdCategoria" Type="int" Nullable="false" />
+    <Property Name="urlFoto" Type="varchar" MaxLength="1000" />
+    <Property Name="Cantidad" Type="int" />
+    <Property Name="Descuento" Type="int" />
+    <Property Name="Presio" Type="real" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK__Cotizacio__IdCot__286302EC">
+    <End Role="Cotizacion" Type="Self.Cotizacion" Multiplicity="1" />
+    <End Role="Cotizacion_Producto" Type="Self.Cotizacion_Producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cotizacion">
+        <PropertyRef Name="IdCotizacion" />
+      </Principal>
+      <Dependent Role="Cotizacion_Producto">
+        <PropertyRef Name="IdCotizacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Cotizacio__IdPro__276EDEB3">
+    <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+    <End Role="Cotizacion_Producto" Type="Self.Cotizacion_Producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Producto">
+        <PropertyRef Name="IdProducto" />
+      </Principal>
+      <Dependent Role="Cotizacion_Producto">
+        <PropertyRef Name="IdProducto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Producto__IdCate__1273C1CD">
+    <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+    <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categoria">
+        <PropertyRef Name="IdCategoria" />
+      </Principal>
+      <Dependent Role="Producto">
+        <PropertyRef Name="IdCategoria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="NANGINFANJEN_DataBaseModelStoreContainer">
+    <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cotizacion" EntityType="Self.Cotizacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cotizacion_Producto" EntityType="Self.Cotizacion_Producto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Cotizacio__IdCot__286302EC" Association="Self.FK__Cotizacio__IdCot__286302EC">
+      <End Role="Cotizacion" EntitySet="Cotizacion" />
+      <End Role="Cotizacion_Producto" EntitySet="Cotizacion_Producto" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Cotizacio__IdPro__276EDEB3" Association="Self.FK__Cotizacio__IdPro__276EDEB3">
+      <End Role="Producto" EntitySet="Producto" />
+      <End Role="Cotizacion_Producto" EntitySet="Cotizacion_Producto" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Producto__IdCate__1273C1CD" Association="Self.FK__Producto__IdCate__1273C1CD">
+      <End Role="Categoria" EntitySet="Categoria" />
+      <End Role="Producto" EntitySet="Producto" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

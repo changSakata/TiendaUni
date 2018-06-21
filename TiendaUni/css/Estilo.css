@@ -1,21 +1,23 @@
-﻿.cartGrande{
-    width :510px;
-    height : auto;
-   
+﻿.cartGrande {
+    width: 510px;
+    height: auto;
     /*padding :25px;*/
 }
-.cartPequeno{
-    width :550px;
-    height : auto;
-   
-    /*padding :25px;*/
+
+.cartPequeno {
+    max-width: 550px;
+    margin-left: 30px;
+    max-height: 350px;
+    margin: 0 !important;
 }
-.cartLargo{
-    width : 800px;
+}
+
+.cartLargo {
+    width: 800px;
     height: 400px;
-    
 }
-.logoPequeno{
-    width :150px;
-    height : auto;
+
+.logoPequeno {
+    width: 150px;
+    height: 50px;
 }
